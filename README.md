@@ -12,6 +12,12 @@ The primary objective is to equip executive leadership with data-driven insights
 * **Dataset Scope:** Global transaction logs containing order details, customer demographics, geographic locations, product categories/sub-categories, shipping modes, shipping costs, sales, profit, and discounts cost from 2011 through 2014.
 
 ---
+## 📁 Project Files & Resources
+
+* **📊 Excel Dashboard File:** Download the full interactive workbook [`Global_Superstore_Analysis.xlsx`](./Global_Superstore_Analysis.xlsx) *(includes Power Query models, DAX measures, and dynamic Pivot Dashboards)*.
+* **💾 Raw Data Source:** [`Global_Superstore2.xlsx`](./Global_Superstore2.xlsx)
+
+---
 
 ## Tools & Technical Tool stack
 * **Data Extraction & Transformation:** Microsoft Excel, Power Query (M Code)
@@ -62,14 +68,18 @@ Total Profit = SUM('Fact Table'[Profit])
 -- Profit Margin Percentage
 Profit Margin % = DIVIDE([Total Profit], [Total Sales], 0)
 
+-- Average Order Value (AOV)
+Average Order Value = DIVIDE([Total Sales], DISTINCTCOUNT('Fact Table'[Order ID]), 0)
+```
 ---
+
 
 ## Research Questions & Exploratory Analysis (EDA)
 
 * **Annual & Seasonal Growth:** How do revenue and profit scale Year-Over-Year (YoY) and Month-Over-Month (MoM)?
 * **Geographic Efficiency:** Which global regions generate top-line volume versus those driving the highest net profit margins?
 * **Product Performance & Loss Leaders:** Which sub-categories generate the highest top-line revenue yet fail to yield net profits?
-* **Promotional Discount Impact:** Does steep discounting (>= 20%) drive profitable volume or erode net profitability?
+* **Promotional Discount Impact:** Does steep discounting ($\ge$ 20%) drive profitable volume or erode net profitability?
 * **Operational Shipping SLAs:** What are the average lead times and on-time delivery rates across shipping modes?
 
 ---
@@ -94,27 +104,41 @@ The final output consists of a dynamic, 3-Page Executive Dashboard designed for 
 * **Bottom Loss Accounts:** Flags specific accounts generating high negative profit due to heavily discounted furniture orders (e.g., Cindy Stewart -$6,152 loss).
 
 ---
+## 🖼️ Interactive Dashboards
+
+### Page 1: Executive & Financial Performance
+![Executive Dashboard]<img width="983" height="620" alt="Executive Dashboard" src="https://github.com/user-attachments/assets/7072dc50-0c97-465a-bb91-18d2916a0ff3" />
+
+
+### Page 2: Product & Logistics Operations
+![Operations Dashboard]<img width="1309" height="646" alt="Products Dashboard" src="https://github.com/user-attachments/assets/b13b1e82-48f3-407b-90e4-a725e0352201" />
+
+
+### Page 3: Customer Behavior & Segmentation
+![Customer Segmentation Dashboard]<img width="964" height="552" alt="Customers Dashboard" src="https://github.com/user-attachments/assets/1b69ca72-8b04-4374-a526-bd1ad03fb7a2" />
+
+---
 
 ## Key Results & Analytical Findings
 
-1. **Geographic Performance (Volume vs. Efficiency):**
-   * **Highest Volume:** **Central Region** leads global revenue with **$2,833,620** in sales (41,911 units).
-   * **Highest Profit Margin Efficiency:** **Canada (26.62%)** and **North Asia (19.52%)** yield the highest net profit per dollar sold.
-   * **The Disparity:** Central Region brings in massive top-line revenue but retains a lower profit margin (**11.09%**) due to high shipping burdens and frequent promotional discounting.
+### 1. Geographic Performance (Volume vs. Efficiency):
+  * **Highest Volume:** **Central Region** leads global revenue with **$2,833,620** in sales (41,911 units).
+  * **Highest Profit Margin Efficiency:** **Canada (26.62%)** and **North Asia (19.52%)** yield the highest net profit per dollar sold.
+  * **The Disparity:** Central Region brings in massive top-line revenue but retains a lower profit margin (**11.09%**) due to high shipping burdens and frequent promotional discounting.
 
-2. **Underperforming Products & "Loss Leaders":**
-   * **Primary Loss Driver:** **Tables** is the largest loss sub-category globally, generating a net loss of **-$64,083.39** despite producing over **$757,000** in sales.
-   * **Root Cause:** Tables are heavy/bulky (driving high shipping costs) and are routinely sold at steep discount rates.
-   * **Profitable Stars:** **Copiers** ($256,568 profit) and **Phones** ($216,717 profit) drive the vast majority of overall company net income.
+### 2. Underperforming Products & "Loss Leaders":
+  * **Primary Loss Driver:** **Tables** is the largest loss sub-category globally, generating a net loss of **-$64,083.39** despite producing over **$757,000** in sales.
+  * **Root Cause:** Tables are heavy/bulky (driving high shipping costs) and are routinely sold at steep discount rates.
+  * **Profitable Stars:** **Copiers** ($256,568 profit) and **Phones** ($216,717 profit) drive the vast majority of overall company net income.
 
-3. **Discount Correlation (The Profit Killer):**
-   * **Normal Discounts (< 20%):** Yield a positive **+15.11% Profit Margin** across 141,465 items sold.
-   * **High Discounts (>= 20%):** Yield a negative **-1.90% Profit Margin** across 36,847 items sold.
-   * **Verdict:** High discounting fails to drive profitable incremental volume. While low/normal discounting retains a healthy 15.11% profit margin, pushing discounts into high tiers erodes profitability and turns orders net-negative across multiple territories.
+### 3. Discount Correlation (The Profit Killer):
+  * **Normal Discounts (< 20%):** Yield a positive **+15.11% Profit Margin** across 141,465 items sold.
+  * **High Discounts (>= 20%):** Yield a negative **-1.90% Profit Margin** across 36,847 items sold.
+  * **Verdict:** High discounting fails to drive profitable incremental volume. While low/normal discounting retains a healthy 15.11% profit margin, pushing discounts into high tiers erodes profitability and turns orders net-negative across multiple territories.
 
-4. **Operational & Shipping Performance:**
-   * **Shipping Volume:** Standard Class accounts for nearly half of all freight expenditures ($614,630.76 out of $1.35M total shipping spend) with an average lead time of **5.00 days**.
-   * **On-Time Delivery:** Overall SLA compliance stands at **67.75%**, leaving significant room for logistics optimization.
+### 4. Operational & Shipping Performance:**
+  * **Shipping Volume:** Standard Class accounts for nearly half of all freight expenditures ($614,630.76 out of $1.35M total shipping spend) with an average lead time of **5.00 days**.
+  * **On-Time Delivery:** Overall SLA compliance stands at **67.75%**, leaving significant room for logistics optimization.
 
 ---
 
@@ -130,7 +154,4 @@ The final output consists of a dynamic, 3-Page Executive Dashboard designed for 
 ## Data Limitations
 
 * **Geographic Granularity:** Non-US states and cities lacked standardized postal codes, necessitating the creation of a composite key (`GeoKey`) in Power Query for data modeling.
-* **Customer Acquisition Cost (CAC):** The dataset lacks customer acquisition costs and direct marketing expenses, limiting profit analysis strictly to gross/net sales profit minus shipping cost.
-
--- Average Order Value (AOV)
-Average Order Value = DIVIDE([Total Sales], DISTINCTCOUNT('Fact Table'[Order ID]), 0)
+* **Customer Acquisition Cost (CAC):** The dataset lacks customer acquisition costs and direct marketing expenses, limiting profit analysis strictly to gross/net sales profit minus shipping.
